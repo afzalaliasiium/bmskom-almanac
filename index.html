@@ -24,8 +24,11 @@
             <label>Activity Name</label>
             <input type="text" id="name" required>
             
-            <label>Date and Time</label>
-            <input type="datetime-local" id="datetime" required>
+            <label>Start Date and Time</label>
+            <input type="datetime-local" id="startDatetime" required>
+
+            <label>End Date and Time</label>
+            <input type="datetime-local" id="endDatetime" required>
             
             <label>Location</label>
             <input type="text" id="location" required>
@@ -75,7 +78,8 @@
 
                 const payload = {
                     name: document.getElementById('name').value,
-                    datetime: document.getElementById('datetime').value,
+                    startDatetime: document.getElementById('startDatetime').value,
+                    endDatetime: document.getElementById('endDatetime').value,
                     location: document.getElementById('location').value,
                     team: document.getElementById('team').value
                 };
@@ -84,7 +88,6 @@
                 fetch(API_URL, {
                     method: 'POST',
                     body: JSON.stringify(payload),
-                    // mode: 'no-cors' is often needed to bypass strict preflight blocks in GAS
                     mode: 'no-cors', 
                     headers: { 'Content-Type': 'application/json' }
                 }).then(() => {
