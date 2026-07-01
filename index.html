@@ -96,7 +96,19 @@
             <input type="text" id="location" required>
             
             <label>Team</label>
-            <input type="text" id="team" required>
+            <select id="team" required>
+                <option value="" disabled selected>Select a team</option>
+                <option value="HOD Support Secretariat">HOD Support Secretariat</option>
+                <option value="ACADEMIA-UG">ACADEMIA-UG</option>
+                <option value="ACADEMIA-PG">ACADEMIA-PG</option>
+                <option value="CURRIQ">CURRIQ</option>
+                <option value="LABRIZ">LABRIZ</option>
+                <option value="IHSAN">IHSAN</option>
+                <option value="PRESTIJ">PRESTIJ</option>
+                <option value="AMAL TAUTAN">AMAL TAUTAN</option>
+                <option value="SYTI">SYTI</option>
+                <option value="OTHER">OTHER</option>
+            </select>
             
             <button type="submit" id="submitBtn">Save Activity</button>
         </form>
@@ -146,7 +158,8 @@
                     <strong>${event.title}</strong>
                     <div class="event-details">
                         🕒 ${formattedDate}<br>
-                        📍 ${event.extendedProps.location}
+                        📍 ${event.extendedProps.location}<br>
+                        👥 ${event.extendedProps.team}
                     </div>
                 `;
                 listEl.appendChild(li);
