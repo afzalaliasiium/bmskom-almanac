@@ -56,6 +56,9 @@
         button { background: #0366d6; color: white; border: none; cursor: pointer; font-weight: bold; font-size: 1.1em; }
         button:hover { background: #0056b3; }
         
+        /* Specific styling for the conditional location input */
+        #locationOther { margin-top: -5px; } /* Pulls it slightly closer to the dropdown */
+
         /* Calendar Container & Buttons */
         .calendar-container { overflow-x: auto; }
         .fc .fc-button {
@@ -93,7 +96,14 @@
             <input type="datetime-local" id="endDatetime" required>
             
             <label>Location</label>
-            <input type="text" id="location" required>
+            <select id="locationSelect" required>
+                <option value="" disabled selected>Select a location</option>
+                <option value="BMS Meeting Room">BMS Meeting Room</option>
+                <option value="BMS Office Open Space">BMS Office Open Space</option>
+                <option value="BMS Lab Office">BMS Lab Office </option>
+                <option value="Others">Others (Please specify)</option>
+            </select>
+            <input type="text" id="locationOther" placeholder="Enter custom location" style="display: none;">
             
             <label>Team</label>
             <select id="team" required>
@@ -129,6 +139,21 @@
     <script>
         // REPLACE THIS WITH YOUR DEPLOYED GOOGLE SCRIPT URL
         const API_URL = 'https://script.google.com/macros/s/AKfycby2bY-FGnyScUxHjDWeZ9gYACHFU7uuuwG8nYM_DABfxWKJK6FWbDgzaEAO7qn9Qp55Lw/exec'; 
+
+        // Handle showing/hiding the "Other" location text field
+        const locationSelect = document.getElementById('locationSelect');
+        const locationOther = document.getElementById('locationOther');
+
+        locationSelect.addEventListener('change', function() {
+            if (this.value === 'Others') {
+                locationOther.style.display = 'block';
+                locationOther.required = true;
+            } else {
+                locationOther.style.display = 'none';
+                locationOther.required = false;
+                locationOther.value = ''; // Clear out the field if they change their mind
+            }
+        });
 
         // Function to render the list at the bottom
         function renderUpcomingEvents(eventsData) {
@@ -208,11 +233,14 @@
                 btn.innerText = 'Saving...';
                 btn.disabled = true;
 
+                // Determine final location value
+                const finalLocation = locationSelect.value === 'Others' ? locationOther.value : locationSelect.value;
+
                 const payload = {
                     name: document.getElementById('name').value,
                     startDatetime: document.getElementById('startDatetime').value,
                     endDatetime: document.getElementById('endDatetime').value,
-                    location: document.getElementById('location').value,
+                    location: finalLocation,
                     team: document.getElementById('team').value
                 };
 
@@ -224,7 +252,10 @@
                 }).then(() => {
                     statusMsg.innerText = "Activity Saved!";
                     statusMsg.style.color = "green";
+                    
                     document.getElementById('activityForm').reset();
+                    locationOther.style.display = 'none'; // Re-hide the custom location input
+                    
                     btn.innerText = 'Save Activity';
                     btn.disabled = false;
                     
