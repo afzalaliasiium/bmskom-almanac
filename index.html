@@ -98,9 +98,26 @@
             <label>Location</label>
             <select id="locationSelect" required>
                 <option value="" disabled selected>Select a location</option>
-                <option value="BMS Meeting Room">BMS Meeting Room</option>
-                <option value="BMS Office Open Space">BMS Office Open Space</option>
-                <option value="BMS Lab Office">BMS Lab Office </option>
+                
+                <optgroup label="Meeting Rooms">
+                    <option value="BMS Meeting Room (Level 2)">BMS Meeting Room (Level 2)</option>
+                    <option value="BMS Office Open Space (Level 2)">BMS Office Open Space (Level 2)</option>
+                    <option value="BMS Lab Office (Level 3)">BMS Lab Office (Level 3)</option>
+                </optgroup>
+
+                <optgroup label="Anatomage">
+                    <option value="Anatomage 1 @ Dissection Hall">Anatomage 1 @ Dissection Hall</option>
+                    <option value="Anatomage 2 @ Medical Museum">Anatomage 2 @ Medical Museum</option>
+                </optgroup>
+
+                <optgroup label="Smartboard Rooms">
+                    <option value="Smartboard 1 @ EM Projection Room (Level 1)">Smartboard 1 @ EM Projection Room (Level 1)</option>
+                    <option value="Smartboard 2 @ BMS Office (Level 2)">Smartboard 2 @ BMS Office (Level 2)</option>
+                    <option value="Smartboard 3 @ Multipurpose Room (Level 2)">Smartboard 3 @ Multipurpose Room (Level 2)</option>
+                    <option value="Smartboard 4 @ BMS Lab Office (Level 3)">Smartboard 4 @ BMS Lab Office (Level 3)</option>
+                    <option value="Smartboard 5 @ BMOLEP Common Room (Level 3)">Smartboard 5 @ BMOLEP Common Room (Level 3)</option>
+                </optgroup>
+                
                 <option value="Others">Others (Please specify)</option>
             </select>
             <input type="text" id="locationOther" placeholder="Enter custom location" style="display: none;">
